@@ -1,0 +1,35 @@
+name: CI
+
+on:
+    pull_request: ~
+    workflow_run:
+        workflows: ["test_on_pr"]
+        types:
+            - completed
+
+jobs:
+    test_on_pr:
+        name: test_on_pr
+        runs-on: ubuntu-latest
+        if: github.event_name == 'pull_request'
+        steps:
+            - name: Test
+              run: |
+                  echo test
+                  echo ${{ github.event.action }}
+                  echo ${{ github.event.pull_request.head.sha }}
+                  echo ${{ github.event.pull_request.head.repo.ssh_url }}
+
+    test_on_workflow:
+        name: test_on_workflow
+        runs-on: ubuntu-latest
+        if: github.event_name == 'workflow_run'
+        steps:
+            - name: Test
+              run: |
+                  echo test
+                  echo ${{ github.event.workflow_run.conclusion }}
+                  echo ${{ github.event.workflow_run.head_branch }}
+                  echo ${{ github.event.workflow_run.head_sha }}
+                  echo ${{ github.event.workflow_run.head_repository.url }}
+                  echo ${{ github.event.workflow_run.head_repository.ssh_url }}
