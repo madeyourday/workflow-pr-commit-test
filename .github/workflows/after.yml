@@ -1,0 +1,21 @@
+name: CI
+
+on:
+    workflow_run:
+        workflows: ["CI"]
+        types:
+            - completed
+
+jobs:
+    test_on_workflow:
+        name: test_on_workflow
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test
+              run: |
+                  echo test
+                  echo ${{ github.event.workflow_run.conclusion }}
+                  echo ${{ github.event.workflow_run.head_branch }}
+                  echo ${{ github.event.workflow_run.head_sha }}
+                  echo ${{ github.event.workflow_run.head_repository.url }}
+                  echo ${{ github.event.workflow_run.head_repository.ssh_url }}

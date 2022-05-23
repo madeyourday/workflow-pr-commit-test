@@ -1,0 +1,16 @@
+name: CI
+
+on:
+    pull_request: ~
+
+jobs:
+    test_on_pr:
+        name: test_on_pr
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test
+              run: |
+                  echo test
+                  echo ${{ github.event.action }}
+                  echo ${{ github.event.pull_request.head.sha }}
+                  echo ${{ github.event.pull_request.head.repo.ssh_url }}
