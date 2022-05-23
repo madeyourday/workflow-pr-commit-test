@@ -18,4 +18,7 @@ jobs:
                   echo ${{ github.event.workflow_run.head_branch }}
                   echo ${{ github.event.workflow_run.head_sha }}
                   echo ${{ github.event.workflow_run.head_repository.url }}
-                  echo ${{ github.event.workflow_run.head_repository.ssh_url }}
+                  echo ${{ github.event.workflow_run.head_repository.html_url }}
+                  echo ${{ github.event.workflow_run.head_repository.full_name }}
+                  echo ${{ github.event.workflow_run.repository.ssh_url }}
+                  echo ${{ github.event.repository.ssh_url }}
