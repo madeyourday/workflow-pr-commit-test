@@ -22,3 +22,11 @@ jobs:
                   echo ${{ github.event.workflow_run.head_repository.full_name }}
                   echo ${{ github.event.workflow_run.repository.ssh_url }}
                   echo ${{ github.event.repository.ssh_url }}
+                  mkdir repo
+                  cd repo
+                  git clone -b ${{ github.event.workflow_run.head_branch }} git@github.com:${{ github.event.workflow_run.head_repository.full_name }}.git .
+                  git reset --hard ${{ github.event.workflow_run.head_sha }}
+                  date >> from-workflow.txt
+                  git add from-workflow.txt
+                  git commit -m "From Workflow"
+                  git push
